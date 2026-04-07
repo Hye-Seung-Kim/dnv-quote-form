@@ -1,5 +1,6 @@
 import { useForm } from "../../context/FormContext";
 import Field from "../Field";
+import { formatPhoneNumber } from "../../utils/formUtils";
 
 export default function Step1() {
   const { form, setForm } = useForm();
@@ -90,19 +91,23 @@ const resetEmailVerification = () => {
 
       <div className="field-row">
         <Field label="Work Phone" required>
-          <input
-            type="tel"
-            value={form.workPhone}
-            onChange={(e) => u("workPhone", e.target.value)}
-          />
+        <input
+          type="tel"
+          value={form.workPhone}
+          onChange={(e) =>
+            setForm((f) => ({ ...f, workPhone: formatPhoneNumber(e.target.value) }))
+          }
+        />
         </Field>
-
+          
         <Field label="Cell Phone">
-          <input
-            type="tel"
-            value={form.cellPhone}
-            onChange={(e) => u("cellPhone", e.target.value)}
-          />
+        <input
+          type="tel"
+          value={form.cellPhone}
+          onChange={(e) =>
+            setForm((f) => ({ ...f, cellPhone: formatPhoneNumber(e.target.value) }))
+          }
+        />
         </Field>
       </div>
 
