@@ -9,9 +9,14 @@ export default function Step1() {
     u("emailVerified", true);
   };
 
-  const resetEmailVerification = () => {
-    u("emailVerified", false);
-  };
+  // Step1.jsx 내부 수정
+const resetEmailVerification = () => {
+  setForm((f) => ({
+    ...f,
+    email: "",          // 이메일 입력칸 비우기
+    emailVerified: false // 인증 상태 초기화
+  }));
+};
 
   return (
     <div className="card">

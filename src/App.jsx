@@ -68,15 +68,18 @@ function FormApp() {
             )}
           </div>
           <div className="footer-right">
-            <button className="btn-primary">Save</button>
-            {step < 5 ? (
-              <button className="btn-primary" onClick={next}>Continue</button>
-            ) : (
-              <button className="btn-primary" onClick={handleSubmit} disabled={!form.certified}>
-                Submit Application
-              </button>
-            )}
-          </div>
+          {/* 마지막 단계(Step 6, 인덱스 5)가 아닐 때만 Save 버튼 노출 */}
+          {step < 5 && <button className="btn-primary">Save</button>}
+
+          {step < 5 ? (
+            <button className="btn-primary" onClick={next}>Continue</button>
+          ) : (
+            /* Step 6일 때는 아래 버튼만 렌더링됨 */
+            <button className="btn-primary" onClick={handleSubmit} disabled={!form.certified}>
+              Submit Application
+            </button>
+          )}
+        </div>
         </div>
       </main>
 
