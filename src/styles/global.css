@@ -1269,15 +1269,36 @@ body { background: var(--bg); }
   transition: all 0.2s ease;
 }
 
-/* 마우스 호버 시 효과 (옵션) */
 .ready-actions .btn-outline:hover {
   background-color: rgba(0, 85, 150, 0.05);
   border-color: #003d6b;
 }
 
-/* 버튼 사이의 간격을 조절하고 싶을 때 */
 .ready-actions {
   display: flex;
   gap: 12px;
   margin-top: 24px;
+}
+
+/* error popup - main*/
+.field.has-error input,
+.field.has-error select,
+.field.has-error textarea {
+  border-color: #d92d20;
+}
+
+.field-error {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #d92d20;
+}
+
+.req {
+  color: #d92d20;
+}
+
+.field-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

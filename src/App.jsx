@@ -8,6 +8,7 @@ import Step3 from "./components/steps/Step3";
 import Step4 from "./components/steps/Step4";
 import Step5 from "./components/steps/Step5";
 import Step6 from "./components/steps/Step6";
+import { getStepErrors } from "./utils/stepValidation";
 import "./styles/global.css";
 
 const STEP_TITLES = [
@@ -21,11 +22,35 @@ const STEP_TITLES = [
 
 function FormApp() {
   const [step, setStep] = useState(0);
+  const [errors, setErrors] = useState({});
   const { form } = useForm();
 
-  const next = () => setStep((s) => Math.min(s + 1, 5));
-  const prev = () => setStep((s) => Math.max(s - 1, 0));
-  const goToStep = (s) => setStep(s);
+  const prev = () => {
+    setErrors({});
+    setStep((s) => Math.max(s - 1, 0));
+  };
+
+  const goToStep = (s) => {
+    setErrors({});
+    setStep(s);
+  };
+
+  const next = () => {
+    const stepErrors = getStepErrors(step, form);
+
+    if (Object.keys(stepErrors).length > 0) {
+      setErrors(stepErrors);
+
+      const uniqueFieldNames = [...new Set(Object.values(stepErrors))];
+      alert(
+        `Please complete all required fields marked with * and verify your email before continuing.\n\nPlease check:\n- ${uniqueFieldNames.join("\n- ")}`
+      );
+      return;
+    }
+
+    setErrors({});
+    setStep((s) => Math.min(s + 1, 5));
+  };
 
   const handleSubmit = () => {
     console.log("DNV Form Payload:", JSON.stringify(form, null, 2));
@@ -34,7 +59,6 @@ function FormApp() {
 
   return (
     <div className="app">
-      {/* Navbar */}
       <nav className="navbar">
         <span className="navbar-brand">DNV Healthcare</span>
         <div className="navbar-user">
@@ -43,47 +67,61 @@ function FormApp() {
         </div>
       </nav>
 
-      {/* Main content */}
       <main className="main">
         <div className="step-header">
           <h1 className="step-title">{STEP_TITLES[step]}</h1>
-          <span className="step-count">Step {step + 1} of {STEP_TITLES.length}</span>
+          <span className="step-count">
+            Step {step + 1} of {STEP_TITLES.length}
+          </span>
         </div>
+
         <ProgressBar currentStep={step} />
 
-        {step === 0 && <Step1 />}
-        {step === 1 && <Step2 />}
-        {step === 2 && <Step3 />}
-        {step === 3 && <Step4 />}
-        {step === 4 && <Step5 />}
+        {step === 0 && <Step1 errors={errors} />}
+        {step === 1 && <Step2 errors={errors} />}
+        {step === 2 && <Step3 errors={errors} />}
+        {step === 3 && <Step4 errors={errors} />}
+        {step === 4 && <Step5 errors={errors} />}
         {step === 5 && <Step6 goToStep={goToStep} />}
 
-        {/* Footer nav inside main */}
         <div className="footer">
           <div>
             {step === 0 ? (
-              <button className="btn-outline">Exit</button>
+              <button className="btn-outline" type="button">
+                Exit
+              </button>
             ) : (
-              <button className="btn-outline" onClick={prev}>Previous</button>
+              <button className="btn-outline" type="button" onClick={prev}>
+                Previous
+              </button>
             )}
           </div>
-          <div className="footer-right">
-          {/* 마지막 단계(Step 6, 인덱스 5)가 아닐 때만 Save 버튼 노출 */}
-          {step < 5 && <button className="btn-primary">Save</button>}
 
-          {step < 5 ? (
-            <button className="btn-primary" onClick={next}>Continue</button>
-          ) : (
-            /* Step 6일 때는 아래 버튼만 렌더링됨 */
-            <button className="btn-primary" onClick={handleSubmit} disabled={!form.certified}>
-              Submit Application
-            </button>
-          )}
-        </div>
+          <div className="footer-right">
+            {step < 5 && (
+              <button className="btn-primary" type="button">
+                Save
+              </button>
+            )}
+
+            {step < 5 ? (
+              <button className="btn-primary" type="button" onClick={next}>
+                Continue
+              </button>
+            ) : (
+              <button
+                className="btn-primary"
+                type="button"
+                onClick={handleSubmit}
+                disabled={!form.certified}
+              >
+                Submit Application
+              </button>
+            )}
+          </div>
         </div>
       </main>
 
-      {/* Support Chat — always visible, fixed */}
       <button type="button" className="support-chat">
         <svg
           viewBox="0 0 24 24"

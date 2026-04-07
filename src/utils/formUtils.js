@@ -19,9 +19,13 @@ export function formatPhoneNumber(value = "") {
   }
   
   export function isValidEmail(value = "") {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value).trim());
   }
   
   export function isNonEmpty(value) {
     return String(value ?? "").trim() !== "";
+  }
+  
+  export function isValidZip(value = "") {
+    return /^\d{5}(-\d{4})?$/.test(String(value).trim());
   }

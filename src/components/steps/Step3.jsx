@@ -10,7 +10,7 @@ const US_STATES = [
   "VA","WA","WV","WI","WY",
 ];
 
-export default function Step3() {
+export default function Step3({ errors = {} }) {
   const { form, setForm } = useForm();
   const up = (key, val) => setForm((f) => ({ ...f, [key]: val }));
   const upInvoicing = (val) =>
@@ -26,6 +26,8 @@ export default function Step3() {
         data={form.ceo}
         onChange={(v) => up("ceo", v)}
         primaryData={form}
+        errors={errors}
+        errorPrefix="ceo"
       />
 
       <ContactBlock
@@ -62,7 +64,7 @@ export default function Step3() {
         </label>
 
         <div className="field-row">
-          <Field label="First Name" required>
+          <Field label="First Name" required error={errors.invoicingFirstName}>
             <input
               type="text"
               value={form.invoicing.firstName}
@@ -70,7 +72,7 @@ export default function Step3() {
             />
           </Field>
 
-          <Field label="Last Name" required>
+          <Field label="Last Name" required error={errors.invoicingLastName}>
             <input
               type="text"
               value={form.invoicing.lastName}
@@ -79,7 +81,7 @@ export default function Step3() {
           </Field>
         </div>
 
-        <Field label="Phone" required>
+        <Field label="Phone" required error={errors.invoicingPhone}>
           <input
             type="tel"
             value={form.invoicing.phone}
@@ -89,7 +91,7 @@ export default function Step3() {
           />
         </Field>
 
-        <Field label="Email" required>
+        <Field label="Email" required error={errors.invoicingEmail}>
           <input
             type="email"
             value={form.invoicing.email}
@@ -101,7 +103,7 @@ export default function Step3() {
           Billing Address
         </div>
 
-        <Field label="Street Address" required>
+        <Field label="Street Address" required error={errors.invoicingStreetAddress}>
           <input
             type="text"
             value={form.invoicing.streetAddress}
@@ -110,7 +112,7 @@ export default function Step3() {
         </Field>
 
         <div className="field-row-3">
-          <Field label="City" required>
+          <Field label="City" required error={errors.invoicingCity}>
             <input
               type="text"
               value={form.invoicing.city}
@@ -118,7 +120,7 @@ export default function Step3() {
             />
           </Field>
 
-          <Field label="State" required>
+          <Field label="State" required error={errors.invoicingState}>
             <select
               value={form.invoicing.state}
               onChange={(e) => upInvoicing({ state: e.target.value })}
@@ -132,7 +134,7 @@ export default function Step3() {
             </select>
           </Field>
 
-          <Field label="ZIP Code" required>
+          <Field label="ZIP Code" required error={errors.invoicingZip}>
             <input
               type="text"
               value={form.invoicing.zip}
