@@ -1,0 +1,1243 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Nunito Sans', sans-serif; }
+
+:root {
+  --navy: #0056A3;
+  --progress-active: #0056A3;
+  --navy-light: #eef3fb;
+  --border: #c8d0df;
+  --border-light: #e2e6ee;
+  --text-primary: #1a1a2e;
+  --text-secondary: #707070;
+  --text-heading : #4E4E4E;
+  --danger: #c0392b;
+  --bg: #f4f5f7;
+}
+
+body { background: var(--bg); }
+
+/* ── Layout ── */
+.app { min-height: 100vh; background: var(--bg); display: flex; flex-direction: column; }
+
+.navbar {
+  background: #002E55; color: white;
+  padding: 16px 32px; height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.navbar-brand { font-size: 20px; font-weight: 700; line-height: 100%; letter-spacing: 0px; }
+.navbar-user { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: #FFFFFF; border: 2px solid white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: #0056A3;
+}
+
+.main {
+  flex: 1; padding: 32px 24px 40px;
+  max-width: 960px; margin: 0 auto; width: 100%;
+}
+
+/* ── Step Header ── */
+.step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.step-title { font-weight: 700; /* Bold */ font-size: 32px; line-height: 100%; letter-spacing: 0; color: var(--text-heading); }
+.step-count { font-size: 14px; color: var(--text-heading); }
+
+/* ── Progress ── */
+.progress-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  
+  .progress-seg {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 라벨 가운데 정렬 */
+  }
+  
+  .progress-seg-bar {
+    width: 100%;
+    height: 8px;
+    border-radius: 64px;
+    background: #dde2ec;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .progress-seg-bar.done {
+    background: #0056A3;
+  }
+  
+  .progress-seg-bar.active {
+    background: #dde2ec;
+  }
+  
+  .progress-seg-bar.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 120px; /* 필요하면 %로 바꾸기 */
+    max-width: 100%;
+    height: 100%;
+    border-radius: 64px;
+    background: #0056A3;
+  }
+  
+  .progress-seg-label {
+    margin-top: 8px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-align: center;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+
+
+/* ── Card ── */
+.card { background: white; border-radius: 8px; border: 1px solid var(--border-light); padding: 28px 32px; margin-bottom: 20px; }
+.section-title { font-size: 17px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.section-sub { font-size: 12px; color: var(--text-secondary); margin-bottom: 20px; }
+.divider { border: none; margin: 20px 0; }
+
+/* ── Field ── */
+.field { margin-bottom: 18px; }
+.field > label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+  }
+.req { color: var(--danger); margin-left: 2px; }
+.field input[type=text],
+.field input[type=email],
+.field input[type=tel],
+.field input[type=date],
+.field select {
+  width: 100%; padding: 9px 12px;
+  border: 1px solid var(--border); border-radius: 5px;
+  font-size: 14px; color: #222; outline: none; transition: border 0.2s;
+}
+.field input:focus, .field select:focus { border-color: var(--navy); }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+/* ── Checkbox / Radio ── */
+.cb-wrap { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; cursor: pointer; font-size: 13px; color: #444; }
+.cb-wrap input { width: 14px; height: 14px; accent-color: var(--navy); cursor: pointer; }
+.radio-wrap input { accent-color: var(--navy); width: 16px; height: 16px; cursor: pointer; }
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 10px;
+  }
+  
+  .radio-wrap {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .radio-wrap input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    flex: 0 0 20px;
+    transform: translateY(-1px);
+  }
+  
+  .radio-text {
+    margin-left: 12px;
+    width: 100%;
+  
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+  
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+
+/* ── Sub-card ── */
+.sub-card { border: 1px solid var(--border-light); border-radius: 6px; padding: 20px; margin-bottom: 16px; }
+.sub-card-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; }
+
+/* ── Site Cards ── */
+.site-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.site-card { border: 1px solid var(--border); border-radius: 6px; padding: 18px; cursor: pointer; transition: all 0.15s; }
+.site-card:hover { border-color: var(--navy); }
+.site-card.selected { border-color: var(--navy); background: var(--navy-light); }
+.site-card-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.site-card-sub { font-size: 12px; color: var(--text-secondary); }
+
+
+/* ── Upload Panel ── */
+.upload-panel {
+    background: #dce9f3;
+    border: 1px solid #aeb8c2;
+    border-radius: 16px;
+    padding: 34px 38px 36px;
+    margin-top: 16px;
+  }
+  
+  .upload-zone {
+    border: 2px dashed #2f5e98;
+    border-radius: 24px;
+    background: #ffffff;
+    min-height: 478px;
+    padding: 64px 24px 56px;
+    text-align: center;
+    cursor: pointer;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .upload-zone:hover {
+    border-color: #0056A3;
+  }
+  
+  .upload-icon {
+    width: 80px;
+    height: 80px;
+    color: #8c8c8c;
+    margin-bottom: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .upload-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  
+  .upload-title {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%;
+    color: #111111;
+    margin-bottom: 18px;
+  }
+  
+  .upload-sub {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.35;
+    color: #7a7a7a;
+    margin-bottom: 34px;
+  }
+  
+  .btn-download-template {
+    background: none;
+    border: none;
+    color: #204a8b;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+  }
+  
+  .btn-download-template:hover {
+    text-decoration: underline;
+  }
+
+  .upload-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  /* hide input */
+  input[type=file] {
+    display: none;
+  }
+  
+  /* ── Uploaded Files ── */
+  .uploaded-file-card--uploading {
+    position: relative;
+    background: #ffffff;
+    border: 2px solid #0056A3;
+    padding: 24px 30px 22px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+    overflow: visible;
+  }
+  
+  .uploaded-remove-floating {
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    width: 56px;
+    height: 56px;
+    border: none;
+    border-radius: 50%;
+    background: #0056A3;
+    color: #ffffff;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+  }
+  
+  .uploaded-remove-floating:hover {
+    background: #004a8c;
+  }
+  
+  .uploaded-file-left--top {
+    align-items: flex-start;
+  }
+  
+  .uploaded-file-info--stack {
+    width: 100%;
+    min-width: 0;
+    flex: 1;
+  }
+  
+  .uploaded-file-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .upload-progress {
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: #d1d1d1;
+    overflow: hidden;
+  }
+  
+  .upload-progress-bar {
+    height: 100%;
+    border-radius: 999px;
+    background: #0056A3;
+    transition: width 0.2s linear;
+  }
+
+  .uploaded-list {
+    margin-top: 28px;
+  }
+  
+  .uploaded-heading {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%;
+    color: #3d3d3d;
+    margin-bottom: 16px;
+  }
+  
+ 
+
+  .uploaded-file-card {
+    width: 568px;
+    height: 58px;
+  
+    border-radius: 8px;
+    background: #ffffff;
+  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    padding: 0 16px;
+  }
+  
+  /* 완료 상태 */
+  .uploaded-file-card--done {
+    border: 1px solid var(--border-light);
+  }
+  
+  /* 업로드 중 */
+  .uploaded-file-card--uploading {
+    border: 2px solid #0056A3;
+    position: relative;
+  }
+
+  
+  .uploaded-file-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-width: 0;
+  }
+
+  .file-icon {
+    width: 24px;
+    height: 24px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    flex-shrink: 0; /* 찌그러짐 방지 */
+  }
+  
+  .file-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .uploaded-file-info {
+    min-width: 0;
+  }
+  
+  .uploaded-file-meta,
+  .uploaded-file-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .uploaded-file-name {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 100%;
+    color: #1f1f1f;
+  }
+  
+  .uploaded-file-name.muted {
+    color: #888888;
+  }
+  
+  .uploaded-file-dot {
+    color: #8a8a8a;
+    font-size: 16px;
+    line-height: 1;
+  }
+  
+  .uploaded-preview-btn {
+    background: none;
+    border: none;
+    color: #0056A3;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 100%;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .uploaded-preview-btn:hover {
+    text-decoration: underline;
+  }
+  
+  .uploaded-file-size {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 100%;
+    color: #666666;
+    flex-shrink: 0;
+  }
+  
+
+  .btn-select-file {
+    width: 113px;
+    height: 35px;
+    padding: 8px 24px;
+    border-radius: 8px;
+    border: none;
+    background: #0056A3;
+    color: #FFFFFF;
+  
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0;
+    cursor: pointer;
+  }
+  
+  .btn-select-file:hover {
+    background: #004a8c;
+  }
+
+/* ── Services ── */
+.svc-tab { padding: 8px 16px; font-size: 13px; color: var(--text-secondary); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; }
+.svc-tab.active { color: var(--navy); border-color: var(--navy); font-weight: 600; }
+.search-wrap {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.search-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    pointer-events: none; /* 아이콘 클릭 시 input으로 이벤트 전달 */
+}
+.svc-search {
+    width: 100%;
+    padding: 8px 36px 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-size: 13px;
+    outline: none;
+  }
+   
+.svc-search:focus {
+    border-color: var(--navy);
+}
+.svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.svc-category { border: 1px solid var(--border-light); border-radius: 6px; padding: 16px; }
+.svc-cat-title { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; }
+.svc-cb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #444; margin-bottom: 8px; cursor: pointer; }
+.svc-cb input { accent-color: var(--navy); }
+.btn-add-other { border: 1px solid var(--navy); color: var(--navy); background: white; border-radius: 5px; padding: 7px 14px; font-size: 13px; cursor: pointer; margin-bottom: 20px; }
+.other-svc-row { display: flex; align-items: center; gap: 8px; }
+.other-svc-row input { flex: 1; }
+.btn-x-red { background: none; border: none; color: #e74c3c; font-size: 20px; cursor: pointer; }
+
+
+.services-tabs {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    border-bottom: 1px solid #d9d9d9;
+    margin-bottom: 18px;
+    padding: 0 0 0 12px;
+  }
+  
+  .svc-tab {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 0 0 10px;
+    margin-bottom: -1px;
+  
+    color: #8a8a8a;
+    cursor: pointer;
+  
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0;
+  }
+  
+  .svc-tab.active {
+    color: #0056A3;
+    border-bottom-color: #0056A3;
+    font-weight: 600;
+  }
+
+
+/* ── Tags ── */
+.tags, .date-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.tag, .date-tag {
+  background: var(--navy); color: white; border-radius: 16px;
+  padding: 3px 10px; font-size: 12px; display: flex; align-items: center; gap: 6px;
+}
+.tag-x { cursor: pointer; font-size: 14px; opacity: 0.8; }
+.tag-x:hover { opacity: 1; }
+
+/* ── Review ── */
+.review-section { border: 1px solid var(--border-light); border-radius: 6px; margin-bottom: 14px; overflow: hidden; }
+.review-section-header {
+  background: var(--navy); color: white;
+  padding: 11px 18px; display: flex; justify-content: space-between; align-items: center;
+  font-size: 14px; font-weight: 600;
+}
+.review-section-body { padding: 18px; }
+.review-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 12px;
+    padding: 14px 0;
+    font-size: 13px;
+    border-bottom: 1px solid #EBEBEB;
+    align-items: start;
+}
+.review-label { color: var(--text-secondary); }
+.review-value { color: #222; font-weight: 500; }
+.btn-edit { color: white; background: none; border: 1px solid rgba(255,255,255,0.4); border-radius: 4px; padding: 2px 10px; font-size: 12px; cursor: pointer; }
+.btn-edit:hover { background: rgba(255,255,255,0.1); }
+.ready-box { border: 1px solid var(--border-light); border-radius: 6px; padding: 20px; margin-top: 16px; }
+.ready-title { font-size: 15px; font-weight: 700; margin-bottom: 12px; }
+.ready-actions { display: flex; gap: 10px; margin-top: 14px; }
+.ready-note { font-size: 12px; color: var(--text-secondary); margin-top: 8px; }
+/* 연락처 카드 */
+.contact-card {
+    background: #F9FAFB;
+    border: 1px solid #EBEBEB;
+    border-radius: 6px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  
+.contact-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 2px;
+  }
+   
+  .contact-meta {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.5;
+  }
+   
+  .contact-email-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+   
+  /* 아코디언 섹션 간격 */
+  .review-section {
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+   
+  /* 기존 review-section-header에 hover 효과 */
+  .review-section-header:hover {
+    background: #004a8c;
+  }  
+
+
+/* ── Footer Buttons ── */
+.btn-primary {
+    background: #0056A3;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+  
+    height: 48px;
+    min-width: 100px;
+    padding: 18px 32px;
+    gap: 12px;
+  
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-align: center;
+  
+    cursor: pointer;
+    opacity: 1;
+    white-space: nowrap;
+  }
+  
+  .btn-primary:hover {
+    background: #004a8c;
+  }
+  
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .btn-outline {
+    background: #FFFFFF;
+    color: #0056A3;
+    border: 1.5px solid #0056A3;
+    border-radius: 8px;
+  
+    height: 48px;
+    min-width: 93px;
+    padding: 18px 32px;
+    gap: 12px;
+  
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-align: center;
+  
+    cursor: pointer;
+    opacity: 1;
+    white-space: nowrap;
+  }
+  
+  .btn-outline:hover {
+    background: #f0f6ff;
+  }
+
+.btn-select { background: #0056A3; color: white; border: none; border-radius: 8px; padding: 8px 18px; font-size: 13px; cursor: pointer; }
+.btn-download { font-size: 12px; color: #0056A3; text-decoration: underline; cursor: pointer; background: none; border: none; margin-top: 8px; }
+
+/* ── Badges ── */
+.badge { font-size: 11px; border-radius: 12px; padding: 2px 10px; }
+.badge-warn { background: #fef9e7; color: #b7950b; border: 1px solid #f9e79f; }
+.badge-ok { background: #eafaf1; color: #1e8449; border: 1px solid #a9dfbf; }
+
+/* ── Footer ── */
+.footer {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 0 40px;
+}
+.footer-right { display: flex; gap: 10px; }
+
+/* ── Support Chat ── */
+.support-chat {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 200;
+  
+    width: 201px;
+    height: 48px;
+    padding: 12px 36px 12px 32px;
+    gap: 8px;
+  
+    border: none;
+    border-radius: 100px;
+    background: #0056A3;
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 100%;
+    letter-spacing: 0;
+  }
+  
+  .support-chat:hover {
+    background: #004a8c;
+  }
+  
+  .support-chat svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .field-row, .field-row-3 { grid-template-columns: 1fr; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .site-cards { grid-template-columns: 1fr; }
+  .main { padding: 20px 16px 100px; }
+  .navbar { padding: 0 16px; }
+  .footer { padding: 14px 16px; }
+  .card { padding: 20px 16px; }
+}
+
+
+/* ── Email Verification ── */
+.email-block {
+    width: 100%;
+  }
+  
+  .email-input-wrap {
+    position: relative;
+    width: 100%;
+  }
+  
+  .email-input {
+    width: 100%;
+  }
+  
+  .email-reset-btn {
+    width: 20px;
+    height: 20px;
+    border: none;
+    background: transparent;
+    color: #4e4e4e;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .email-reset-btn:hover {
+    color: #0056A3;
+  }
+  
+  .email-meta-row {
+    margin-top: 8px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  
+  .btn-verify-email {
+    height: 35px;
+    padding: 8px 24px;
+  
+    border-radius: 8px;
+    border: 1.5px solid #0056A3;
+  
+    background: #ffffff;
+    color: #0056A3;
+  
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+  
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  
+    cursor: pointer;
+  }
+  
+  .btn-verify-email:hover {
+    background: #f4f8ff;
+  }
+  
+  .verify-badge {
+    height: 24px;
+    padding: 4px 12px;
+    border-radius: 999px;
+  
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 1;
+  
+    white-space: nowrap;
+  }
+  
+  .verify-badge.is-warn {
+    background: #FDF1CC;
+    color: #9A6B00;
+  }
+  
+  .verify-badge.is-ok {
+    background: #EAF7EE;
+    color: #1E8449;
+  }
+
+
+.field-label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  
+  .field-label-row label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 0;
+  }
+  
+  .field-label-action {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .multi-date-field {
+    width: 100%;
+  }
+  
+  .multi-date-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .multi-date-input-wrap input[type="date"] {
+    flex: 1;
+  }
+  
+  .multi-date-add-btn {
+    height: 40px;
+    padding: 0 16px;
+    border: none;
+    border-radius: 8px;
+    background: #0056A3;
+    color: #ffffff;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  
+  .multi-date-add-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  
+  .tags,
+  .date-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  
+  .tag,
+  .date-tag {
+    background: #0056A3;
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 4px 10px;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .tag-x {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 1;
+    padding: 0;
+  }
+
+
+  /* ── Action Tag (Standards to Apply) ── */
+/* global.css 맨 아래에 붙여넣기 */
+
+.action-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+  
+    min-width: 94px;
+    height: 31px;
+  
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid #0056A3;
+    background: #FFFFFF;
+    box-sizing: border-box;
+  
+    color: #1A3A70;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0;
+  }
+  
+  .action-tag .tag-x {
+    color: #1A3A70;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  
+  /* 반응형: 작은 화면에서도 태그가 깨지지 않게 */
+  @media (max-width: 640px) {
+    .action-tag {
+      min-width: unset;
+      width: auto;
+    }
+  }
+
+
+  /* ── Date Tag (global.css에 추가) ── */
+
+.date-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+  
+    min-width: 120px;
+    height: 31px;
+  
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: #0056A3;
+    box-sizing: border-box;
+  
+    color: #FFFFFF;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0;
+  }
+  
+  /* X 버튼: 흰색 원 + 파란 X */
+  .date-tag .tag-x {
+    width: 16px;
+    height: 16px;
+    border-radius: 30px;
+    background: #FFFFFF;
+  
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  
+    color: #0056A3;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+    opacity: 1;
+  }
+  
+  .date-tag .tag-x:hover {
+    background: #e8f0fb;
+  }
+  
+  /* 반응형: 작은 화면에서도 min-width 해제 */
+  @media (max-width: 640px) {
+    .date-tag {
+      min-width: unset;
+      width: auto;
+    }
+  }
+
+
+  .review-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 18px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ebebeb;
+    align-items: start;
+  }
+  
+  .contact-card {
+    background: #f7f7f8;
+    border: 1px solid #eeeeee;
+    border-radius: 6px;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .contact-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 2px;
+  }
+  
+  .contact-meta {
+    font-size: 13px;
+    color: #333333;
+    line-height: 1.45;
+  }
+  
+  .site-location-card {
+    background: #f7f7f8;
+    border: 1px solid #eeeeee;
+    border-radius: 6px;
+    padding: 10px 14px;
+  }
+  
+  .site-location-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 6px;
+  }
+  
+  .site-location-meta {
+    font-size: 13px;
+    color: #333333;
+    line-height: 1.5;
+  }
+  
+  .review-tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  
+  .review-tag-outline {
+    display: inline-flex;
+    align-items: center;
+    height: 26px;
+    padding: 0 10px;
+    border: 1px solid #0056A3;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #0056A3;
+    font-size: 12px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  
+  .review-date-links {
+    color: #0056A3;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 600;
+  }
+  
+  .btn-review-action {
+    height: 36px;
+    min-width: 112px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+
+  /* 사이트 리스트 컨테이너 (중앙 정렬 및 간격) */
+.site-location-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* 라벨 옆으로 정렬하기 위해 오른쪽 정렬 (ReviewRow 구조에 맞춤) */
+    gap: 12px;
+    margin-top: 16px;
+  }
+  
+  
+.site-card-address, 
+.site-card-details, 
+.site-card-days {
+    font-size: 14px;
+    color: #495057;
+    line-height: 1.5;
+    margin-bottom: 4px;
+  }
+  
+  /* ReviewRow 내부에서 카드가 붕 뜨지 않게 조정 */
+.review-row:last-child {
+    align-items: flex-start;
+}
+  
+  .site-card-header {
+    font-weight: 700;
+    font-size: 16px;
+    color: #212529;
+    margin-bottom: 8px;
+  }
+  
+.site-card-address, 
+.site-card-details, 
+.site-card-days {
+    font-size: 14px;
+    color: #495057;
+    line-height: 1.6;
+}
+  
+  /* ReviewRow 레이아웃 보정: 카드가 클 경우 라벨이 상단에 고정되도록 */
+  .review-row {
+    display: flex;
+    align-items: flex-start; /* baseline 대신 flex-start 권장 */
+    padding: 12px 0;
+  }
+
+
+  /* card update */
+  /* ReviewRow 내부의 value 영역 커스텀 */
+.site-review-content {
+    display: flex;
+    flex-direction: column; /* 위아래로 쌓이게 함 */
+    width: 100%;
+    align-items: flex-start;
+  }
+  
+  .input-method-value {
+    margin-bottom: 16px; /* 'File Upload' 글자와 첫 카드 사이 간격 */
+    font-size: 14px;
+    color: #212529;
+  }
+  
+  /* 카드 리스트 컨테이너 */
+  .site-location-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%; /* 부모 너비에 맞춤 */
+  }
+  
+  /* 개별 카드 스타일 수정 */
+  .site-location-card-styled {
+    width: 100%; /* 고정값 대신 100%로 설정하여 부모 영역을 채움 */
+    max-width: 662px; /* 최대 너비는 유지 */
+    background: #F8F9FA;
+    border-radius: 6px;
+    padding: 20px 24px;
+    border: 1px solid #E9ECEF;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* 내부 텍스트 간격 */
+  }
+  
+  /* ReviewRow 자체의 정렬 보정 */
+  .review-row {
+    display: flex;
+    padding: 16px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .review-label {
+    width: 180px; /* 라벨 너비 고정 */
+    flex-shrink: 0;
+    color: #6c757d;
+  }
+  
+  .review-value {
+    flex-grow: 1; /* 나머지 공간을 모두 차지 */
+  }
